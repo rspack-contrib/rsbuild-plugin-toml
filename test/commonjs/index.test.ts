@@ -10,17 +10,19 @@ test('should render page as expected', async ({ page }) => {
 	const rsbuild = await createRsbuild({
 		cwd: __dirname,
 		rsbuildConfig: {
-			plugins: [pluginToml()],
-			server: {
-				port: 3100,
-			},
+			plugins: [
+				pluginToml({
+					esModule: false,
+				}),
+			],
 		},
 	});
 
 	const { server, urls } = await rsbuild.startDevServer();
 
 	await page.goto(urls[0]);
-	expect(await page.evaluate('window.a')).toBe('{"list":[1,2]}');
+	expect(await page.evaluate('window.age')).toBe(1);
+	expect(await page.evaluate('window.b')).toBe('{"list":[1,2]}');
 
 	await server.close();
 });
@@ -29,10 +31,11 @@ test('should build succeed', async ({ page }) => {
 	const rsbuild = await createRsbuild({
 		cwd: __dirname,
 		rsbuildConfig: {
-			plugins: [pluginToml()],
-			server: {
-				port: 3100,
-			},
+			plugins: [
+				pluginToml({
+					esModule: false,
+				}),
+			],
 		},
 	});
 
@@ -40,7 +43,8 @@ test('should build succeed', async ({ page }) => {
 	const { server, urls } = await rsbuild.preview();
 
 	await page.goto(urls[0]);
-	expect(await page.evaluate('window.a')).toBe('{"list":[1,2]}');
+	expect(await page.evaluate('window.age')).toBe(1);
+	expect(await page.evaluate('window.b')).toBe('{"list":[1,2]}');
 
 	await server.close();
 });

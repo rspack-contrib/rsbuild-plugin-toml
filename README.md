@@ -50,6 +50,22 @@ console.log(example.hello); // 'world';
 console.log(example.foo); // { bar: 'baz' };
 ```
 
+## Options
+
+### esModule
+
+By default, `@rsbuild/plugin-toml` generates JS modules that use the ES modules syntax. If you want to generate a CommonJS module, you can set the `esModule` option to `false`.
+
+- Type: `boolean`
+- Default: `true`
+- Example:
+
+```js
+pluginToml({
+  exModule: false,
+});
+```
+
 ## Type Declaration
 
 When you import TOML files in TypeScript code, please create a `src/env.d.ts` file in your project and add the type declarations.
