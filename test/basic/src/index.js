@@ -1,1 +1,7 @@
-window.test = 1;
+import { age } from './a.toml';
+import b from './b.toml';
+
+window.age = age;
+window.b = JSON.stringify(b);
+
+console.log(age, b);
