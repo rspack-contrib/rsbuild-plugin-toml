@@ -1,16 +1,16 @@
 import type { RsbuildPlugin } from '@rsbuild/core';
 
-export type PluginExampleOptions = {
-	foo?: string;
-	bar?: boolean;
-};
+export const PLUGIN_TOML_NAME = 'rsbuild:toml';
 
-export const pluginExample = (
-	options: PluginExampleOptions = {},
-): RsbuildPlugin => ({
-	name: 'plugin-example',
+export const pluginToml = (): RsbuildPlugin => ({
+	name: PLUGIN_TOML_NAME,
 
-	setup() {
-		console.log('Hello Rsbuild!', options);
+	async setup(api) {
+		const { parse } = await import('toml');
+
+		api.transform({ test: /\.toml$/ }, ({ code }) => {
+			const parsed = parse(code);
+			return `module.exports = ${JSON.stringify(parsed, undefined, '\t')};`;
+		});
 	},
 });

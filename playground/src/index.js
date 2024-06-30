@@ -1,8 +1,7 @@
-import './index.css';
+import { age } from './a.toml';
+import b from './b.toml';
 
-document.querySelector('#root').innerHTML = `
-<div class="content">
-  <h1>Vanilla Rsbuild</h1>
-  <p>Start building amazing things with Rsbuild.</p>
-</div>
-`;
+window.age = age;
+window.b = JSON.stringify(b);
+
+console.log(age, b);
