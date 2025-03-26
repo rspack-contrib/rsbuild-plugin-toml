@@ -11,7 +11,7 @@ export const pluginToml = (options: PluginTomlOptions = {}): RsbuildPlugin => ({
 
 	async setup(api) {
 		const { parse } = await import('toml');
-		const { esModule } = options;
+		const { esModule = true } = options;
 
 		api.transform({ test: /\.toml$/ }, ({ code }) => {
 			const parsed = parse(code);
