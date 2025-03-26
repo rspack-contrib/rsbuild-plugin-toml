@@ -62,7 +62,7 @@ By default, `@rsbuild/plugin-toml` generates JS modules that use the ES modules 
 
 ```js
 pluginToml({
-  exModule: false,
+  esModule: false,
 });
 ```
 
